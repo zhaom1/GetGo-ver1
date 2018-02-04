@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">GetGo</string>
+    <string name="mark_title">Mark</string>
+	<string name="course_title">Courses</string>
+
+    <string name="brands">No beers selected</string>
+    <string-array name="beer_colors">
+        <item>light</item>
+        <item>amber</item>
+        <item>brown</item>
+        <item>dark</item>
+    </string-array>
+</resources>
+
