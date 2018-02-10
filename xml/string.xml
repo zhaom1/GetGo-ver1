@@ -1,14 +1,18 @@
 <resources>
     <string name="app_name">GetGo</string>
     <string name="mark_title">Mark</string>
-	<string name="course_title">Courses</string>
+    <string name="course_title">Courses</string>
 
     <string name="brands">No beers selected</string>
-    <string-array name="beer_colors">
-        <item>light</item>
-        <item>amber</item>
-        <item>brown</item>
-        <item>dark</item>
+    <string name="add">ADD</string>
+    <string name="enter_course_name">Enter Course Name</string>
+    <string name="enter_mark">Enter Mark</string>
+    <string name="percent">%</string>
+    <string-array name="courses">
+        <item>Math 30-1</item>
+        <item>English 30-1</item>
+        <item>Physics</item>
+        <item>Chemistry</item>
     </string-array>
 </resources>
 
