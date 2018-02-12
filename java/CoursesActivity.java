@@ -20,12 +20,14 @@ import java.util.ArrayList;
 
 public class CoursesActivity extends AppCompatActivity implements OnClickListener{
 
+    /*These values are being refrenced from the xml files*/
     private Button btnAdd;
     private ListView lv;
     private AutoCompleteTextView course_box;
     private EditText mark_box;
     ArrayList<String> list = new ArrayList<String>();
     ArrayAdapter<String> adapter;
+    private static String[] Classes = new String[] {"English 30-1", "Math 30-1", "Physics 30-1", "English 30-2"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,26 +35,27 @@ public class CoursesActivity extends AppCompatActivity implements OnClickListene
         setContentView(R.layout.activity_courses);
         AutoCompleteTextView autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
 
+        //Fills the dropdown menu with the variables in the array Classes
         ArrayAdapter<String> adapter_classes = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, Classes);
         autoCompleteTextView.setAdapter(adapter_classes);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, list);
 
-         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, list);
-
+       //Assigning variables to the list_box, the marks text box and the add button
        course_box = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
        mark_box = (EditText) findViewById(R.id.editText);
-        btnAdd = (Button)findViewById(R.id.add_button);
-        btnAdd.setOnClickListener(this);
+       btnAdd = (Button)findViewById(R.id.add_button);
+       btnAdd.setOnClickListener(this);
 
         lv=(ListView) findViewById(R.id.listView);
         lv.setAdapter(adapter);
     }
 
-    private static String[] Classes = new String[] {"English 30-1", "Math 30-1", "Physics 30-1", "English 30-2"};
-
+    //When buttton is clicked, joins the strings and places in tex box
     public void onClick(View v)
     {
         String course_name = course_box.getText().toString();
         String course_mark = mark_box.getText().toString();
+
         if(course_mark.length() > 0 && course_mark.length() > 0)
         {
             String join = course_name + "    " + course_mark + "%";
@@ -67,4 +70,3 @@ public class CoursesActivity extends AppCompatActivity implements OnClickListene
         return true;
     }
 }
-
