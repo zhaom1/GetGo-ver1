@@ -64,9 +64,4 @@ public class CoursesActivity extends AppCompatActivity implements OnClickListene
             course_box.setText("");
         }
     }
-
-    public boolean onCreateOptions(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 }
