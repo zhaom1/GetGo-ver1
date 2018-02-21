@@ -5,34 +5,36 @@ package ca.macewan.getgo.getgo;
  */
 
 public class Course {
-        private int course_id;
-        private String course_name;
-        private int credits;
-        private String description;
 
-        public Course(int id, String title, int credits, String description) {
-            this.course_id = id;
-            this.course_name = title;
-            this.credits = credits;
-            this.description = description;
-        }
+    public String id;
+    public String name;
+    public String credits;
+    public String description;
 
-        public int getCourseId() {
-            return course_id;
-        }
-
-        public String getCourseTitle() {
-            return course_name;
-        }
-
-        public String getCourseDescription() {
-            return description;
-        }
-
-        public int getCourseCredits() {
-            return credits;
-        }
-
+    public Course(String id, String title, String credits, String description) {
+        this.id = id;
+        this.name = title;
+        this.credits = credits;
+        this.description = description;
     }
+
+    public String getCourseId() {
+        return id;
+    }
+
+    public String getCourseTitle() {
+        return name;
+    }
+
+    public String getCourseDescription() {
+        return description;
+    }
+
+    public String  getCourseCredits() {
+        return credits;
+    }
+
+}
+
 
 
