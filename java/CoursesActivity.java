@@ -1,63 +1,78 @@
 package com.example.getgo.getgo_v1;
-
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+import android.util.Log;
 import android.view.View.OnClickListener;
-import android.text.AutoText;
-import android.view.autofill.AutofillValue;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.ListView;
-import android.app.ListActivity;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
+/**
+ * Created by Siham on 2018-02-20.
+ *
+ * This Class will contain references to the list of courses
+ * and can also place other lists of data information we need for logic.
+ */
 
-public class CoursesActivity extends AppCompatActivity implements OnClickListener{
+public class CoursesActivity extends AppCompatActivity implements OnClickListener {
 
-    /*These values are being refrenced from the xml files*/
+    //a list to store all the products
+    List<Course> CourseList;
+
+    /*These values are being referenced from the xml files*/
     private Button btnAdd;
     private ListView lv;
     private AutoCompleteTextView course_box;
     private EditText mark_box;
-    ArrayList<String> list = new ArrayList<String>();
+    ArrayList<String> list = new ArrayList<>();
     ArrayAdapter<String> adapter;
-    private static String[] Classes = new String[] {"English 30-1", "Math 30-1", "Physics 30-1", "English 30-2"};
+    ArrayList<String> Classes = new ArrayList<>();
+    ArrayAdapter<String> adapter_classes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Singleton singleton = new Singleton();
+        singleton.execute();
+        JsonObject jsonObject = singleton.doInBackground();
+
+        //initializing the productlist
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses);
-        AutoCompleteTextView autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
+        AutoCompleteTextView autoCompleteTextView = findViewById(R.id.autoCompleteTextView);
 
         //Fills the dropdown menu with the variables in the array Classes
-        ArrayAdapter<String> adapter_classes = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, Classes);
+        adapter_classes = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, Classes);
         autoCompleteTextView.setAdapter(adapter_classes);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, list);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, list);
 
-       //Assigning variables to the list_box, the marks text box and the add button
-       course_box = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
-       mark_box = (EditText) findViewById(R.id.editText);
-       btnAdd = (Button)findViewById(R.id.add_button);
-       btnAdd.setOnClickListener(this);
+        //Assigning variables to the list_box, the marks text box and the add button
+        course_box = findViewById(R.id.autoCompleteTextView);
+        mark_box = findViewById(R.id.editText);
+        btnAdd = findViewById(R.id.add_button);
+        btnAdd.setOnClickListener(this);
 
-        lv=(ListView) findViewById(R.id.listView);
+        lv = findViewById(R.id.listView);
         lv.setAdapter(adapter);
+
+        CourseList = new ArrayList<>();
     }
 
     //When buttton is clicked, joins the strings and places in tex box
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         String course_name = course_box.getText().toString();
         String course_mark = mark_box.getText().toString();
 
-        if(course_mark.length() > 0 && course_mark.length() > 0)
-        {
+        Log.d("size","Size: " + CourseList.size());
+
+        if (course_mark.length() > 0 && course_mark.length() > 0) {
             String join = course_name + "    " + course_mark + "%";
             adapter.add(join);
             mark_box.setText("");
