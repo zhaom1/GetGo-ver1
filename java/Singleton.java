@@ -4,11 +4,16 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 
+import java.net.URLConnection;
 import java.net.URL;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.net.URLConnection;
+import java.util.ArrayList;
+
+import static com.example.getgo.getgo_v1.CoursesActivity.*;
+import static java.lang.System.load;
 
 
 /**
@@ -22,13 +27,13 @@ import java.net.URLConnection;
  *  - org.json.jar
  */
 
-public class Singleton extends AsyncTask<String ,Void, JsonObject> {
+public class Singleton extends AsyncTask <String,Void, JsonObject>{
 
-    public JsonObject jsonObject = null;
     String inputLine;
-    private Exception exception;
+    private ArrayAdapter<String> adapter_classes;
 
-    public Singleton() {
+    public Singleton(ArrayAdapter<String> aa){
+        this.adapter_classes = aa;
     }
 
     /*
@@ -41,8 +46,9 @@ public class Singleton extends AsyncTask<String ,Void, JsonObject> {
 
         /* Getting the URL connection: change to specific IP port and not localhost*/
         try {
-            URL url = new URL("http://172.20.48.233:8888/getGophp/tmp.php");
-            con = url.openConnection();
+            URL url = new URL("http://192.168.0.11:8888/getGophp/tmp.php");
+            con =  url.openConnection();
+
         } catch (Exception e) {
             Log.d("Singleton", "\n-------- ERROR: connecting to port and host.-------  " + e.getLocalizedMessage());
 
@@ -52,12 +58,13 @@ public class Singleton extends AsyncTask<String ,Void, JsonObject> {
         /* Extracting the json string*/
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
             inputLine = in.readLine();
             System.out.print(inputLine);
-            return null;
-        } catch (Exception e) {
-                Log.d("Singleton", "\n--------Error: extracting the Json from the Location.-------  " + e);
+            Log.d("Singleton", "INPUT1: " + in.readLine());
 
+        } catch (Exception e) {
+                Log.d("Singleton", "\n--------Error: extracting the Json from the Location.-------  " +  e );
         }
 
         /*
@@ -71,13 +78,15 @@ public class Singleton extends AsyncTask<String ,Void, JsonObject> {
                 .create();
 
         // Loading the string to the class, if you get an error here then class doesn't match string
-        JsonObject p = g.fromJson(inputLine, JsonObject.class);
-        JsonObject jsonObj = new JsonObject();
-        jsonObj.course = p.course;
+        JsonObject jsonObject = g.fromJson(inputLine, JsonObject.class);
+        return  jsonObject;
+    }
 
-        Log.d("Singleton: ", "\n -------  " + p.getNames());
-
-        return p;
-
+    /* Once done, Loads the adapter with the string*/
+    public void onPostExecute(JsonObject result) {
+        Log.d("Singleton", "INPUT3: " + result.getNames());
+        adapter_classes.addAll(result.getNames());
+        return;
     }
 }
+
