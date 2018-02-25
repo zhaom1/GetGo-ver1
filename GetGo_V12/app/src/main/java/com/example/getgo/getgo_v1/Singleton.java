@@ -46,7 +46,7 @@ public class Singleton extends AsyncTask <String,Void, JsonObject>{
 
         /* Getting the URL connection: change to specific IP port and not localhost*/
         try {
-            URL url = new URL("http://192.168.0.11:8888/getGophp/tmp.php");
+            URL url = new URL("http://192.168.0.114:80/backend_Getgo/get_all_courses.php");
             con =  url.openConnection();
 
         } catch (Exception e) {

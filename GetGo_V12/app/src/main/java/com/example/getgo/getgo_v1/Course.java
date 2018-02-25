@@ -2,24 +2,24 @@ package com.example.getgo.getgo_v1;
 
 public class Course {
 
-    public String id;
-    public String name;
+    public String course_id;
+    public String course_name;
     public String credits;
     public String description;
 
     public Course(String id, String title, String credits, String description) {
-        this.id = id;
-        this.name = title;
+        this.course_id = id;
+        this.course_name = title;
         this.credits = credits;
         this.description = description;
     }
 
     public String getCourseId() {
-        return id;
+        return course_id;
     }
 
     public String getCourseTitle() {
-        return name;
+        return course_name;
     }
 
     public String getCourseDescription() {

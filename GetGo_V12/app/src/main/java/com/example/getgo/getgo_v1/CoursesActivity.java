@@ -69,6 +69,7 @@ public class CoursesActivity extends AppCompatActivity implements OnClickListene
             adapter.add(join);
             mark_box.setText("");
             course_box.setText("");
+            Log.d("list_tag", "In List:  " + adapter.getItem(0));
         }
     }
 }

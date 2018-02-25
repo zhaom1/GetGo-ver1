@@ -15,7 +15,7 @@ public class JsonObject {
      * This List can be referenced anywhere
      *  and contains all the courses in the DB
      */
-    public ArrayList<Course> course = new ArrayList<>();
+    public ArrayList<Course> courses = new ArrayList<>();
 
 
     /*
@@ -23,8 +23,8 @@ public class JsonObject {
      */
     public ArrayList<String> getNames(){
         ArrayList<String> courseNames = new ArrayList<String>();
-        for(int i=0; i < this.course.size(); i++){
-            courseNames.add(course.get(i).name);
+        for(int i=0; i < this.courses.size(); i++){
+            courseNames.add(courses.get(i).course_name);
         }
         return courseNames;
     }
