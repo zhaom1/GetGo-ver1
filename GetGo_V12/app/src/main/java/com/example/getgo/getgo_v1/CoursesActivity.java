@@ -26,6 +26,8 @@ public class CoursesActivity extends AppCompatActivity implements OnClickListene
 
     /*These values are being referenced from the xml files*/
     private Button btnAdd;
+    private Button btnDelete;
+    private Button btnModify;
     private ListView lv;
     private AutoCompleteTextView course_box;
     private EditText mark_box;
@@ -55,6 +57,12 @@ public class CoursesActivity extends AppCompatActivity implements OnClickListene
         btnAdd = findViewById(R.id.add_button);
         btnAdd.setOnClickListener(this);
 
+        btnDelete = findViewById(R.id.delete_button);
+        btnDelete.setOnClickListener(this);
+
+        btnModify = findViewById(R.id.modify_button);
+        btnModify.setOnClickListener(this);
+
         lv = findViewById(R.id.listView);
         lv.setAdapter(adapter);
     }
@@ -64,12 +72,24 @@ public class CoursesActivity extends AppCompatActivity implements OnClickListene
         String course_name = course_box.getText().toString();
         String course_mark = mark_box.getText().toString();
 
-        if (course_mark.length() > 0 && course_mark.length() > 0) {
-            String join = course_name + "    " + course_mark + "%";
-            adapter.add(join);
-            mark_box.setText("");
-            course_box.setText("");
-            Log.d("list_tag", "In List:  " + adapter.getItem(0));
+        switch (v.getId()) {
+            case R.id.add_button:
+                  if (course_mark.length() > 0 && course_mark.length() > 0) {
+                    String join = course_name + "    " + course_mark + "%";
+                    adapter.add(join);
+                    mark_box.setText("");
+                    course_box.setText("");
+                    Log.d("list_tag", "In List:  " + adapter.getItem(0));
+                  }
+                  break;
+            case R.id.delete_button:
+                adapter.clear();
+                mark_box.setText("");
+                course_box.setText("");
+                break;
+            case R.id.modify_button:
+                //still need more work on Modify button: how to traverse the adapater to find the position of the current click
+                break;
         }
     }
 }
