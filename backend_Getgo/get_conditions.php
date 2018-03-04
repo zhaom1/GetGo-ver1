@@ -28,7 +28,7 @@ class Get_All_Conditions
     * Usage: $user->create_user();
     * Return: None
     */
-    function get_condtions()
+    function get_conditions()
     {
 
 /*
@@ -37,7 +37,7 @@ class Get_All_Conditions
 
     // array for JSON response
         $response = array();
-        $query = "SELECT * from condition"; 
+        $query = "SELECT * from conditions"; 
     // get all products from products table
         $result = mysqli_query($this->connection, $query) or die(mysqli_error($this->connection));
 
@@ -45,7 +45,7 @@ class Get_All_Conditions
         if (mysqli_num_rows($result) > 0) {
     // looping through all results
     // products node
-            $response["condition"] = array();
+            $response["conditions"] = array();
     
         while ($row = mysqli_fetch_array($result)) {
         // temp user array
@@ -57,7 +57,7 @@ class Get_All_Conditions
             $condition["min_mark"] = $row["min_mark"];
 
         // push single product into final response array
-            array_push($response["condition"], $ccondition);
+            array_push($response["conditions"], $condition);
         }
     // success
         $response["success"] = 1;
