@@ -45,21 +45,21 @@ class Get_All_Conditions
         if (mysqli_num_rows($result) > 0) {
     // looping through all results
     // products node
-            $response["linked_condition"] = array();
+            $response= array();
     
         while ($row = mysqli_fetch_array($result)) {
         // temp user array
             $condition = array();
             
             $condition["id"] = $row["id"];
-            $condition["conditon_id"] = $row["condition_id"];
+            $condition["condition_id"] = $row["condition_id"];
             $condition["condition_group"] = $row["condition_group"];
 
         // push single product into final response array
-            array_push($response["linked_condition"], $condition);
+            array_push($response, $condition);
         }
     // success
-        $response["success"] = 1;
+        //$response["success"] = 1;
 
     // echoing JSON response
         echo json_encode($response);

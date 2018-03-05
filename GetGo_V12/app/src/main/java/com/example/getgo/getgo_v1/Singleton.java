@@ -10,10 +10,6 @@ import java.net.URLConnection;
 import java.net.URL;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-
-import static com.example.getgo.getgo_v1.CoursesActivity.*;
-import static java.lang.System.load;
 
 
 /**

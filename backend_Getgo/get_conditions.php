@@ -45,7 +45,7 @@ class Get_All_Conditions
         if (mysqli_num_rows($result) > 0) {
     // looping through all results
     // products node
-            $response["conditions"] = array();
+            $response = array();
     
         while ($row = mysqli_fetch_array($result)) {
         // temp user array
@@ -57,10 +57,10 @@ class Get_All_Conditions
             $condition["min_mark"] = $row["min_mark"];
 
         // push single product into final response array
-            array_push($response["conditions"], $condition);
+            array_push($response, $condition);
         }
     // success
-        $response["success"] = 1;
+        //$response["success"] = 1;
 
     // echoing JSON response
         echo json_encode($response);
