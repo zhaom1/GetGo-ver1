@@ -15,16 +15,14 @@ import java.lang.String;
 import java.util.ArrayList;
 
 public class CourseLogic {
-    public static void main(String[] args) {
-        String institution = "1";
-        String department = "3";
+    public ArrayList checkLogic (String institution, String department, ArrayList<String> studentCourses, ArrayList<String> studentMarks) {
         ArrayList<String> condId;
         ArrayList<ArrayList<String>> links = new ArrayList<>();
         ArrayList<ArrayList<String>> courses = new ArrayList<>();
         ArrayList<ArrayList<String>> courseNames = new ArrayList<>();
         condId = getConditionId(institution, department);
         if (condId == null) {
-            return;
+            return null;
         }
 
         for (String id: condId) {
@@ -49,19 +47,17 @@ public class CourseLogic {
             }
             courseNames.add(names);
         }
-        
+
         //Hard coded example of a dictionary containing student courses and marks. This array has to be sorted when obtained from the database.
-        HashMap<String, Integer> Student = new HashMap<>();
-        Student.put("English Language Arts 30-1", 90);
-        Student.put("Mathematics 30-1", 71);
-        Student.put("Physics 30", 69);
-        Student.put("Chemistry 30", 91);
-        Student.put("Mathematics 31", 90);
+        HashMap<String, Integer> student = new HashMap<>();
+        for (int i=0; i<studentCourses.size();i++) {
+            student.put(studentCourses.get(i), Integer.parseInt(studentMarks.get(i)));
+        }
 
         //Call to the checkCourse function, it will either return null which means the student meet the requirements, an arrayList containing all the
         //condition that they failed, or a arrayList containing an average which means they failed the average requirement.
-        ArrayList check = checkCourse(Student, courseNames, 99);
-        System.out.print(check);
+        ArrayList check = checkCourse(student, courseNames, 99);
+        return check;
     }
     private static String readUrl(String urlString) throws Exception {
         BufferedReader reader = null;
